@@ -58,47 +58,60 @@
 
     $registro_plano = intval(readline("Entre com o registro do plano desejado: "));
     $plano_existe = plano_existe($registro_plano,$planos);
-    if (!$plano_existe) {
+    while (!$plano_existe) {
+      limpar_tela();
       print_r("Plano inválido\n");
-      return -1;
-    } else {
-      $quantidade_beneficiarios = intval(readline("Entre com a quantidade de beneficiários: "));
-      while ($quantidade_beneficiarios <= 0){
-        $quantidade_beneficiarios = intval(readline("Entre com um valor maior que 0 para quantidade de beneficiários: "));
+      print_r("Entre com o código de algum dos seguintes planos:\n");
+      $comprimento_plano = strlen($planos[0]["nome"]);
+      $mask = "|%-{$comprimento_plano}s |%-6s\n";
+      printf($mask, 'Plano', 'Código');
+      for ($i = 0; $i < count($planos); $i++) { 
+        printf($mask, $planos[$i]["nome"], $planos[$i]["codigo"]);
+      }
+      print_r("----------------------------------------------------------------------\n");
+      $registro_plano = intval(readline("Entre com o registro do plano desejado: "));
+      $plano_existe = plano_existe($registro_plano,$planos);
+    }
+    limpar_tela();
+    $quantidade_beneficiarios = intval(readline("Entre com a quantidade de beneficiários: "));
+    while ($quantidade_beneficiarios <= 0){
+      $quantidade_beneficiarios = intval(readline("Entre com um valor maior que 0 para quantidade de beneficiários: "));
+    }
+
+    limpar_tela();
+    $beneficiarios = [];
+    $valor_total = 0.0;
+    $maior_nome = 0;
+    for ($i = 1; $i <= $quantidade_beneficiarios; $i++) {
+      $nome_beneficiario = readline("Entre com o nome do beneficiário ".$i.": ");
+      if (strlen($nome_beneficiario) > $maior_nome) {
+        $maior_nome = strlen($nome_beneficiario);
+      }
+
+      $idade_beneficiario = readline("Entre com a idade do beneficiário ".$i.": ");
+      while (!idade_valida($idade_beneficiario)) {
+        $idade_beneficiario = readline("Entre com um valor maior que 0 para a idade do beneficiário ".$i.": ");
       }
 
       limpar_tela();
-      $beneficiarios = [];
-      $valor_total = 0.0;
-      $maior_nome = 0;
-      for ($i = 1; $i <= $quantidade_beneficiarios; $i++) {
-        $nome_beneficiario = readline("Entre com o nome do beneficiário ".$i.": ");
-        if (strlen($nome_beneficiario) > $maior_nome) {
-          $maior_nome = strlen($nome_beneficiario);
-        }
+      $faixa_beneficiario = faixa_idade($idade_beneficiario);
+      $preco_beneficiario = obter_valor_beneficiario($precos,$faixa_beneficiario,$registro_plano,$quantidade_beneficiarios);
+      $valor_total += $preco_beneficiario;
+      array_push($beneficiarios, [$nome_beneficiario,$idade_beneficiario, $preco_beneficiario]);
+    }
 
-        $idade_beneficiario = readline("Entre com a idade do beneficiário ".$i.": ");
-        while (!idade_valida($idade_beneficiario)) {
-          $idade_beneficiario = readline("Entre com um valor maior que 0 para a idade do beneficiário ".$i.": ");
-        }
-
-        limpar_tela();
-        $faixa_beneficiario = faixa_idade($idade_beneficiario);
-        $preco_beneficiario = obter_valor_beneficiario($precos,$faixa_beneficiario,$registro_plano,$quantidade_beneficiarios);
-        $valor_total += $preco_beneficiario;
-        array_push($beneficiarios, [$nome_beneficiario,$idade_beneficiario, $preco_beneficiario]);
-      }
-
-      print_r("Valor total do plano ".$planos[$registro_plano-1]["nome"]." para ".$quantidade_beneficiarios." beneficiário(s):\n");
-      print_r("R$".number_format($valor_total,2, ',','.')."\n");
-      
-      print_r("----------------------------------------------------------------------\n");
-      print_r("Valor para cada beneficiário:\n");
-      $mask = "|%-{$maior_nome}s |%-5s |%-5s \n";
-      printf($mask, 'Nome', 'Idade', 'Preço para faixa de idade');
-      for ($i = 0; $i < count($beneficiarios); $i++) { 
-        printf($mask, $beneficiarios[$i][0], $beneficiarios[$i][1],"R$".number_format($beneficiarios[$i][2],2,',','.'));
-      }
+    print_r("Valor total do plano ".$planos[$registro_plano-1]["nome"]." para ".$quantidade_beneficiarios." beneficiário(s):\n");
+    print_r("R$".number_format($valor_total,2, ',','.')."\n");
+    
+    print_r("----------------------------------------------------------------------\n");
+    print_r("Valor para cada beneficiário:\n");
+    if ($maior_nome < 5) {
+      $maior_nome = 5;
+    }
+    $mask = "|%-{$maior_nome}s |%-5s |%-5s \n";
+    printf($mask, 'Nome', 'Idade', 'Preço para faixa de idade');
+    for ($i = 0; $i < count($beneficiarios); $i++) { 
+      printf($mask, $beneficiarios[$i][0], $beneficiarios[$i][1],"R$".number_format($beneficiarios[$i][2],2,',','.'));
     }
   }
 
