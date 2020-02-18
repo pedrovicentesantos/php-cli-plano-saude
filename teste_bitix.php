@@ -133,9 +133,14 @@
 
     $beneficiarios = [];
     $valor_total = 0.0;
-    $maior_nome = 0;
+    $maior_nome = 5;
     for ($i = 1; $i <= $quantidade_beneficiarios; $i++) {
       $nome_beneficiario = readline("Entre com o nome do beneficiário ".$i.": ");
+      if (sair_programa($nome_beneficiario) === -1){
+        limpar_tela();
+        mensagem_saida();
+        return -1;
+      }
       if (strlen($nome_beneficiario) > $maior_nome) {
         $maior_nome = strlen($nome_beneficiario);
       }
@@ -157,9 +162,7 @@
     
     print_r("----------------------------------------------------------------------\n");
     print_r("Valor para cada beneficiário:\n");
-    if ($maior_nome < 5) {
-      $maior_nome = 5;
-    }
+    
     $mask = "|%-{$maior_nome}s |%-5s |%-5s \n";
     printf($mask, 'Nome', 'Idade', 'Preço para faixa de idade');
     for ($i = 0; $i < count($beneficiarios); $i++) { 
