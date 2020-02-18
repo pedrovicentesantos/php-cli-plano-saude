@@ -77,17 +77,13 @@
     limpar_tela();
     $resultado = mensagem_inicial();
     if ($resultado === -1) {
-      limpar_tela();
-      mensagem_saida();
       return -1;
     }
     limpar_tela();
 
     $registro_plano = readline("Entre com o registro do plano desejado: ");
     if (sair_programa($registro_plano) === -1) {
-      limpar_tela();
-      mensagem_saida();
-      return -1;
+     return -1;
     }
     $registro_plano = intval($registro_plano);
     $plano_existe = plano_existe($registro_plano,$planos);
@@ -104,8 +100,6 @@
       print_r("----------------------------------------------------------------------\n");
       $registro_plano = readline("Entre com o registro do plano desejado: ");
       if (sair_programa($registro_plano) === -1) {
-        limpar_tela();
-        mensagem_saida();
         return -1;
       }
       $registro_plano = intval($registro_plano);
@@ -116,15 +110,11 @@
 
     $quantidade_beneficiarios = readline("Entre com a quantidade de beneficiários: ");
     if (sair_programa($quantidade_beneficiarios) === -1){
-      limpar_tela();
-      mensagem_saida();
       return -1;
     }
     while (!valor_valido($quantidade_beneficiarios)){
       $quantidade_beneficiarios = readline("Entre com um valor maior que 0 para a quantidade de beneficiários: ");
       if (sair_programa($quantidade_beneficiarios) === -1){
-        limpar_tela();
-        mensagem_saida();
         return -1;
       }
     }
@@ -137,8 +127,6 @@
     for ($i = 1; $i <= $quantidade_beneficiarios; $i++) {
       $nome_beneficiario = readline("Entre com o nome do beneficiário ".$i.": ");
       if (sair_programa($nome_beneficiario) === -1){
-        limpar_tela();
-        mensagem_saida();
         return -1;
       }
       if (strlen($nome_beneficiario) > $maior_nome) {
@@ -147,15 +135,11 @@
 
       $idade_beneficiario = readline("Entre com a idade do beneficiário ".$i.": ");
       if (sair_programa($idade_beneficiario) === -1){
-        limpar_tela();
-        mensagem_saida();
         return -1;
       }
       while (!valor_valido($idade_beneficiario)) {
         $idade_beneficiario = readline("Entre com um valor maior que 0 para a idade do beneficiário ".$i.": ");
         if (sair_programa($idade_beneficiario) === -1){
-          limpar_tela();
-          mensagem_saida();
           return -1;
         }
       }
@@ -180,5 +164,9 @@
     }
   }
 
-  main();
+  $resultado = main();
+  if ($resultado === -1) {
+    limpar_tela();
+    mensagem_saida();
+  }
 ?>
