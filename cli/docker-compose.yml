@@ -1,0 +1,7 @@
+version: "3"
+services:
+  php-form-cli:
+    container_name: php-form-cli
+    build: .
+    volumes:
+      - ../data:/usr/src/myapp/data

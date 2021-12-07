@@ -1,0 +1,10 @@
+version: "3"
+services:
+  php-form-html:
+    container_name: php-form-html
+    image: php:8-apache
+    ports:
+      - "8181:80"
+    volumes:
+      - ./:/var/www/html
+      - ../data:/var/www/html/data

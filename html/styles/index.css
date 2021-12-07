@@ -1,0 +1,239 @@
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(202, 222, 248);
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  place-items: center;
+  padding: 1rem;
+  color: rgb(41, 41, 41);
+}
+
+form {
+  width: 100%;
+}
+
+fieldset {
+  display: grid;
+  border: none;
+  gap: 1rem 0;
+  width: 100%;
+  padding: 2.5rem;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  border: none;
+  border-radius: 5px;
+  margin-top: 0.5rem;
+  outline: none;
+  padding: 0.25rem;
+}
+
+.input-wrapper {
+  display: grid;
+}
+
+header {
+  font-weight: bold;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  color: white;
+  font-size: 1rem;
+  background-color: rgb(28, 54, 88);
+}
+
+button.next, button[type="submit"] {
+  background-color: rgb(6, 88, 17);
+}
+
+button.previous {
+  background-color: rgb(117, 117, 117);
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#modal {
+  display: none; 
+  position: fixed;
+  padding: 0 0.5rem;
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 50% auto; 
+  padding: 1.5rem 1.25rem;
+  border: 1px solid #888;
+  width: 100%;
+  height: 25vh;
+  display: grid;
+  align-items: center;
+  gap: 1rem 0;
+  position: relative;
+}
+
+.plan-information {
+  display: grid;
+  align-items: center;
+  gap: 2rem 0;
+}
+
+.close {
+  position: absolute;
+  font-size: 2rem;
+  top: 0;
+  right: 0.5rem;
+}
+
+header.modal, section.modal {
+  display: grid;
+  grid-template-columns: 40% 20% 20% auto;
+  padding: 0;
+}
+
+section.modal {
+  font-size: 1.25rem;
+}
+
+section.start {
+  display: grid;
+  gap: 2rem 0;
+  height: 50%;
+  place-items: center;
+  padding: 1rem;
+}
+
+section.start h1, section.start h3 {
+  text-align: center;
+  width: 100%;
+}
+
+section.beneficiaries {
+  display: grid;
+  gap: 1rem 0;
+}
+
+section.start.hide, .hide, section.plans.hide {
+  display: none;
+}
+
+section.plans {
+  width: 100%;
+  padding: 1rem;
+}
+
+section.plans button {
+  width: 50%;
+  margin-bottom: 3rem;
+}
+
+section.plans ul {
+  list-style: none;
+}
+
+section.plans li {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+section.result-container {
+  display: grid;
+  gap: 2rem 0;
+  height: 100%;
+  width: 100%;
+  grid-template-rows: 5% 10% auto;
+}
+
+section.result-container h1 {
+  align-self: center;
+}
+
+section.result-container button {
+  width: 50%;
+}
+
+header, section.beneficiary {
+  display: grid;
+  grid-template-columns: 50% 15% 15% 20%;
+  padding: 0.5rem;
+}
+
+section.beneficiary {
+  align-items: center;
+}
+
+section.beneficiary:nth-child(odd) {
+  background-color: rgb(86, 147, 228);
+}
+
+section.beneficiary:nth-child(even) {
+  background-color: rgb(155, 194, 245);
+}
+
+.value, .total {
+  text-align: right;
+  font-weight: bold;
+}
+
+.total {
+  padding: 0.5rem;
+}
+
+@media only screen and (min-width: 768px) {
+  form, section.result-container, section.start {
+    max-width: 600px;
+  }
+
+  section.plans {
+    display: grid;
+    max-width: 600px;
+    text-align: center;
+  }
+
+  section.plans ul {
+    justify-self: start;
+  }
+
+  section.plans li, .close {
+    cursor: pointer;
+  }
+
+  .modal-content {
+    margin: 20% auto;
+    max-width: 600px;
+  }
+
+  header.modal, section.modal {
+    text-align: left;
+  }
+}

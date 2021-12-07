@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/index.css">
+  <title>Cadastro de planos de saúde</title>
+</head>
+<body>
+  <section class="plans hide">
+    <button class="beginning">Início</button>
+    <div id="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <header class="modal">
+          <p>Mínimo de vidas</p>
+          <p>Faixa 1</p>
+          <p>Faixa 2</p>
+          <p>Faixa 3</p>
+        </header>
+        <div class="plan-information">
+          <section class="modal">
+            <p>1</p>
+            <p>R$10,00</p>
+            <p>R$12,00</p>
+            <p>R$15,00</p>
+          </section>
+          <section class="modal">
+            <p>1</p>
+            <p>R$10,00</p>
+            <p>R$12,00</p>
+            <p>R$15,00</p>
+          </section>
+        </div>
+      </div>
+    </div>
+    <ul></ul>
+  </section>
+  <section class="start">
+    <h1>Bem vindo ao cadastro de planos de saúde</h1>
+    <h3>Entre com o código do plano desejado e número de beneficiários para checar o valor total e por cada beneficiário</h3>
+    <div class="buttons">
+      <button class="plan">Ver planos</button>
+      <button id="start" class="next">Começar</button>
+    </div>
+  </section>
+  <form class="hide" method="post" action="form.php">
+    <fieldset>
+      <div class="input-wrapper">
+        <label for="code">Código do plano:</label>
+        <input type="number" name="code" id="code" required min="1">
+      </div>
+      <div class="input-wrapper">
+        <label for="quantity">Quantidade de beneficiários:</label>
+        <input type="number" name="quantity" id="quantity" min="1" max="10" required>
+      </div>
+      <div class="buttons">
+        <button type="button" class="previous beginning">Início</button>
+        <button type="button" id="next" class="next">Próximo</button>
+      </div>
+      <p class="hide error"></p>
+    </fieldset>
+    <fieldset class="hide">
+      <section class="beneficiaries"></section>
+      <div class="buttons">
+        <button type="button" id="previous" class="previous">Anterior</button>
+        <button type="submit">Calcular</button>
+      </div>
+    </fieldset>
+  </form>
+  <script src="js/index.js"></script>
+</body>
+</html>
