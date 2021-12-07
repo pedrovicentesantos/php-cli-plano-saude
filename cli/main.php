@@ -68,10 +68,10 @@
   }
 
   function main() {
-    $json = file_get_contents("./planos.json");
+    $json = file_get_contents("./data/planos.json");
     $planos = json_decode($json, true);
 
-    $json = file_get_contents("./precos.json");
+    $json = file_get_contents("./data/precos.json");
     $precos = json_decode($json, true);
 
     limpar_tela();

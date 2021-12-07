@@ -4,36 +4,25 @@ Criação de um programa que permite ao usuário cadastrar um novo Plano de Saú
 
 ## Tecnologias
 
-- PHP na versão 7.1
-  * Programa rodando todo na linha de comando
+- PHP na versão 7.1 para a versão CLI
+- PHP na versão 8 para a versão com HTML
 - Docker
 
-## Uso com o Docker
+## Rodando a aplicação
 
 É possível utilizar o programa sem ter o PHP instalado na própria máquina, fazendo o uso do Docker.
 
-Para isso deve-se clonar o repositório e manter o arquivo `Dockerfile` na mesma pasta do arquivo `main.php`. Caso contrário, o Docker não encontrará o arquivo principal e não vai conseguir executar o programa.
-
-Feito isto, para usar a aplicação com o Docker deve-se executar primeiramente:
+Para isso deve-se clonar o repositório e executar os comandos:
 
 ```shell
-docker build -t my-php-app .  # Cria a imagem
+  docker-compose run --rm php-form-cli  # Versão CLI
+  docker-compose up   # Versão HTML
 ```
-No comando anterior `my-php-app` é o nome da imagem Docker. Pode ser escolhido qualquer nome.
-
-Para rodar o script basta executar:
-
-```shell
-docker run -it --rm --name my-running-app my-php-app  # Cria e executa o container
-```
-No comando anterior `my-running-app` é o nome do container, que também pode ser qualquer nome.
-<br>
-Importante usar o nome correto da imagem criada anteriormente. No exemplo, a imagem se chama `my-php-app`.
-
-Ao fim da execução do programa, o Docker para e remove o container automaticamente.
 
 ## Funcionamento
 
-Todo o programa funciona pela linha de comando. Basta seguir os comandos indicados para utilizá-lo.
+No caso da versão CLI, todo o programa funciona pela linha de comando. Basta seguir os comandos indicados para utilizá-lo.
 
 Caso deseje sair do programa a qualquer momento, basta digitar a tecla `e`.
+
+Para a versão com HTML, basta acessar [http://localhost:8181](http://localhost:8181).
